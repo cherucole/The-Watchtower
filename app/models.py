@@ -44,10 +44,10 @@ class Profile(models.Model):
 
 
 class Neighborhood(models.Model):
-    Locality=models.CharField(max_length=30)
+    locality=models.CharField(max_length=30, default="e.g Nairobi, Juja, Kiambu etc")
     name = models.CharField(max_length=30)
     occupants_count=models.IntegerField(default=0, blank=True)
-    profile=models.ForeignKey(Profile, on_delete=models.CASCADE, null=True)
+    # profile=models.ForeignKey(Profile, on_delete=models.CASCADE, null=True)
     user_profile = models.ForeignKey(User,on_delete=models.CASCADE, related_name='posts',blank=True)
     date = models.DateTimeField(auto_now_add=True)
     '''
@@ -110,3 +110,13 @@ class Business(models.Model):
         businesses=Business.objects.filter(neighborhood_id=id)
         return businesses
 
+
+class Join(models.Model):
+	'''
+    Updating user location each time they join or leave a neghborhood	
+    '''
+	user_id = models.OneToOneField(User)
+	hood_id = models.ForeignKey(Neighborhood)
+
+	def __str__(self):
+		return self.user_id
