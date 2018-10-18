@@ -12,8 +12,8 @@ class NewProfileForm(forms.ModelForm):
         model = Profile
         exclude = ['user']
 
-# class UploadForm(forms.ModelForm):
-#     class Meta:
-#         model = Post
-#         exclude = ['user_profile', 'profile','likes', 'opinions']
+class AddHoodForm(forms.ModelForm):
+    class Meta:
+        model = Neighborhood
+        exclude = ['user_profile', 'profile']
 

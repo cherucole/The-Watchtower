@@ -30,7 +30,12 @@
 
 
 
+{% for hood in hoods%}
 
+{{hood.name | upper}}
+{{hood.occupants_count}}
+
+{% endfor %}
 
 
 

@@ -11,9 +11,9 @@ from .forms import *
 from .email import *
 
 def homepage(request):
-    posts = "testing to link templates"
+    hoods = Neighborhood.all_neighborhoods()
 
-    return render(request, 'index.html', {"posts":posts})
+    return render(request, 'index.html', {"hoods":hoods})
 
 @login_required(login_url='/accounts/login/')
 def add_profile(request):
@@ -29,3 +29,18 @@ def add_profile(request):
     else:
         form = NewProfileForm()
     return render(request, 'new_profile.html', {"form": form})
+
+@login_required(login_url='/accounts/login/')
+def add_hood(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = AddHoodForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.user_profile = current_user
+            post.save()
+        return redirect('homepage')
+
+    else:
+        form = AddHoodForm()
+    return render(request, 'add_hood.html', {"form": form})

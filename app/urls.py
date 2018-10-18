@@ -7,6 +7,8 @@ urlpatterns=[
 
 
     url(r'^$', views.homepage, name='homepage'),
+        url(r'^add/hood$', views.add_hood, name='add_hood'),
+
     # url(r'^upload$', views.upload_image, name='upload'),
     # url(r'^accounts/profile/(?P<username>\w+)', views.profile, name='my_profile'),
     # url(r'^search_results/', views.search_results, name='search'),
