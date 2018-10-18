@@ -7,9 +7,14 @@ import datetime as dt
 
 class Profile(models.Model):
     avatar = models.ImageField(upload_to='images/', blank=True)
-    bio = HTMLField()
     contact = HTMLField()
+    email = models.EmailField(max_length=70,blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
+    '''
+    this is added to ensure the linter has n errors saying class has no objects member in VS Code IDE
+    '''
+    objects = models.Manager() 
+
 
     def save_profile(self):
         self.save()
@@ -38,43 +43,47 @@ class Profile(models.Model):
         ordering = ['user']
 
 
-class Post(models.Model):
+class Neighborhood(models.Model):
+    Locality=models.CharField(max_length=30)
     name = models.CharField(max_length=30)
-    image = models.ImageField(upload_to='images/', blank=True)
-    description = HTMLField(blank=True)
-    live_link=models.URLField(blank=True)
+    occupants_count=models.IntegerField(default=0, blank=True)
     profile=models.ForeignKey(Profile, on_delete=models.CASCADE, null=True)
     user_profile = models.ForeignKey(User,on_delete=models.CASCADE, related_name='posts',blank=True)
     date = models.DateTimeField(auto_now_add=True)
+    '''
+    this is added to ensure the linter has n errors saying class has no objects member in VS Code IDE
+    '''
+    objects = models.Manager() 
+
 
     @classmethod
-    def search_by_name(cls,search_term):
-        posts = cls.objects.filter(name__icontains=search_term)
-        return posts
+    def search_neighborhood_by_name(cls,search_term):
+        neighborhoods = cls.objects.filter(name__icontains=search_term)
+        return neighborhoods
 
     @classmethod
-    def one_post(cls, id):
-        post=Post.objects.filter(id=id)
-        return post
+    def one_neighborhood(cls, id):
+        neighborhood=Neighborhood.objects.filter(id=id)
+        return neighborhood
 
     @classmethod
-    def all_posts(cls):
-        posts = cls.objects.all()
-        return posts
+    def all_neighborhoods(cls):
+        neighborhoods = cls.objects.all()
+        return neighborhoods
 
     @classmethod
-    def get_user_posts(cls, profile_id):
-        images=Post.objects.filter(profile_id=id)
+    def get_neighborhood_businesses(cls, neighborhood_id):
+        businesses=Neighborhood.objects.filter(neighborhood_id=id)
+
+    # @classmethod
+    # def get_profile_image(cls, profile):
+    #     neighborhoods = Neighborhood.objects.filter(user_profile__pk=profile)
+    #     return neighborhoods
 
     @classmethod
-    def get_profile_image(cls, profile):
-        posts = Post.objects.filter(user_profile__pk=profile)
-        return posts
-
-    @classmethod
-    def get_post_by_id(cls,id):
-        post = Post.objects.filter(id = Post.id)
-        return post
+    def get_neighborhood_by_id(cls,id):
+        neighborhood = Neighborhood.objects.filter(id = Neighborhood.id)
+        return neighborhood
 
     @classmethod
     def get_all_profiles(cls):
