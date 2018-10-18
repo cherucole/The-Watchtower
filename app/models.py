@@ -94,6 +94,7 @@ class Neighborhood(models.Model):
 
 class Business(models.Model):
     name = models.CharField(max_length=30)
+    description = HTMLField(blank=True)
     email = models.EmailField(max_length=70,blank=True)
     biz_owner=models.ForeignKey(Profile, on_delete=models.CASCADE, null=True)
     biz_hood=models.ForeignKey(Neighborhood, on_delete=models.CASCADE, null=True)
