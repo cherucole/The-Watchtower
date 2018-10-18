@@ -120,3 +120,32 @@ class Join(models.Model):
 
 	def __str__(self):
 		return self.user_id
+
+
+class Post(models.Model):
+    name = models.CharField(max_length=30)
+    image = models.ImageField(upload_to='images/', blank=True)
+    description = HTMLField(blank=True)
+    hood_id=models.ForeignKey(Neighborhood, on_delete=models.CASCADE, null=True)
+    date = models.DateTimeField(auto_now_add=True)
+
+    @classmethod
+    def search_post(cls,search_term):
+        posts = cls.objects.filter(name__icontains=search_term)
+        return posts
+
+
+    @classmethod
+    def get_hood_posts(cls, hood_id):
+        posts=Post.objects.filter(hood_id=id)
+        return posts
+
+    # @classmethod
+    # def get_profile_image(cls, profile):
+    #     posts = Post.objects.filter(user_profile__pk=profile)
+    #     return posts
+
+    # @classmethod
+    # def get_post_by_id(cls,id):
+    #     post = Post.objects.filter(id = Post.id)
+    #     return post
