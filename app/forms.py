@@ -7,10 +7,10 @@ from .models import *
 #         model = Comment
 #         exclude = ['poster', 'imagecommented']
 
-# class NewProfileForm(forms.ModelForm):
-#     class Meta:
-#         model = Profile
-#         exclude = ['user']
+class NewProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        exclude = ['user']
 
 # class UploadForm(forms.ModelForm):
 #     class Meta:
