@@ -11,7 +11,7 @@ class Profile(models.Model):
     email = models.EmailField(max_length=70,blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
     '''
-    this is added to ensure the linter has n errors saying class has no objects member in VS Code IDE
+    this is added to ensure the linter has no errors saying class has no objects member in VS Code IDE
     '''
     objects = models.Manager() 
 
@@ -51,7 +51,7 @@ class Neighborhood(models.Model):
     user_profile = models.ForeignKey(User,on_delete=models.CASCADE, related_name='posts',blank=True)
     date = models.DateTimeField(auto_now_add=True)
     '''
-    this is added to ensure the linter has n errors saying class has no objects member in VS Code IDE
+    this is added to ensure the linter has no errors saying class has no objects member in VS Code IDE
     '''
     objects = models.Manager() 
 
@@ -71,9 +71,11 @@ class Neighborhood(models.Model):
         neighborhoods = cls.objects.all()
         return neighborhoods
 
-    @classmethod
-    def get_neighborhood_businesses(cls, neighborhood_id):
-        businesses=Neighborhood.objects.filter(neighborhood_id=id)
+#this should be in the business model
+    # @classmethod
+    # def get_neighborhood_businesses(cls, neighborhood_id):
+    #     businesses=Neighborhood.objects.filter(neighborhood_id=id)
+    #     return businesses
 
     # @classmethod
     # def get_profile_image(cls, profile):
@@ -90,40 +92,20 @@ class Neighborhood(models.Model):
         profile = Profile.objects.all()
         return profile
 
-class Ratings(models.Model):
-    INPUT = (
-        (1, '1'),
-        (2, '2'),
-        (3, '3'),
-        (4, '4'),
-        (5, '5'),
-        (6, '6'),
-        (7, '7'),
-        (8, '8'),
-        (9, '9'),
-        (10, '10'),
-    )
+class Business(models.Model):
+    name = models.CharField(max_length=30)
+    email = models.EmailField(max_length=70,blank=True)
+    biz_owner=models.ForeignKey(Profile, on_delete=models.CASCADE, null=True)
+    biz_hood=models.ForeignKey(Neighborhood, on_delete=models.CASCADE, null=True)
 
-    design=models.IntegerField(choices=INPUT, default=0, blank=True)
-    usability=models.IntegerField(choices=INPUT, blank=True)
-    content=models.IntegerField(choices=INPUT, blank=True)
-    score=models.IntegerField(default=0, blank=True)
-    # poster = models.ForeignKey(User,on_delete=models.CASCADE, null=True)
-    post_rated = models.ForeignKey(Post,on_delete=models.CASCADE, related_name='ratings',null=True)
+    '''
+    this is added to ensure the linter has no errors saying class has no objects member in VS Code IDE
+    '''
+    objects = models.Manager() 
 
-    def save_comment(self):
-        self.save()
 
     @classmethod
-    def get_ratings(cls, id):
-        ratings = Ratings.objects.filter(post_id=id).all()
-        return ratings
-
-#     @classmethod
-#     def get_all_comments(cls):
-#         comments = Comment.objects.all()
-#         return comments
-#
-#     def __str__(self):
-#         return self.comment
+    def get_neighborhood_businesses(cls, neighborhood_id):
+        businesses=Business.objects.filter(neighborhood_id=id)
+        return businesses
 
