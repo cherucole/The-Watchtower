@@ -112,8 +112,8 @@ class Business(models.Model):
 
 
     @classmethod
-    def get_hood_biz(cls, id):
-        businesses = Business.objects.filter(biz_hood_pk=id)
+    def get_hood_biz(cls, biz_hood):
+        businesses = Business.objects.filter(biz_hood_pk=biz_hood)
         return businesses
 
 

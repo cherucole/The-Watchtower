@@ -15,7 +15,7 @@ def homepage(request):
 	if request.user.is_authenticated:
 		if Join.objects.filter(user_id = request.user).exists():
 			hood = Neighborhood.objects.get(pk = request.user.join.hood_id.id)
-			posts = 'Posts.objects.filter(hood = request.user.join.hood_id.id)'
+			posts = Post.objects.filter(post_hood = request.user.join.hood_id.id)
 			businesses = Business.objects.filter(biz_hood = request.user.join.hood_id.id)
 			return render(request,'current_hood.html',{"hood":hood,"businesses":businesses,"posts":posts})
 		else:
@@ -101,7 +101,7 @@ def leave_hood(request,hood_id):
 	'''
 	if Join.objects.filter(user_id = request.user).exists():
 		Join.objects.get(user_id = request.user).delete()
-		messages.error(request, 'You have left this awesome neighborhood ;-(')
+		# messages.error(request, 'You have left this awesome neighborhood ;-(')
 		return redirect('homepage')
 
 
@@ -131,8 +131,9 @@ def add_post(request):
         form = AddPostForm()
     return render(request, 'add_post.html', {"form": form})
 
-def view_biz(request, id):
-    current_user = request.user
-    businesses= Business.get_neighborhood_businesses(id)
+# def view_biz(request, biz_hood):
+#     current_user = request.user
+#     hood=Neighborhood.objects.get(id=biz_hood)
+#     businesses= Business.get_neighborhood_businesses(biz_hood = hood.id)
 
-    return redirect (request, 'businesses.html', {"business":businesses})
+#     return redirect (request, 'businesses.html', {"business":businesses})

@@ -13,7 +13,7 @@ urlpatterns=[
     url(r'^add/biz$', views.add_biz, name='add_biz'),
     url(r'^add/post$', views.add_post, name='add_post'),
 
-    url(r'^hood/(?P<id>\d+)', views.view_biz, name='businesses'),
+    # url(r'^hood/(?P<biz_hood>\d+)', views.view_biz, name='businesses'),
 
     # url(r'^accounts/profile/(?P<username>\w+)', views.profile, name='my_profile'),
     # url(r'^search_results/', views.search_results, name='search'),
