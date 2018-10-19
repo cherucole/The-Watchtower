@@ -27,7 +27,9 @@
 <body>
     <div class="container-fluid">
         <h1 id="mainheading" style="text-align:center;" class="display-4"> Watchtower</h1>
-        {{hood.name}}
+        <h3>Hood: {{hood.name}}</h3>
+        <h4>Location: {{hood.locality}}</h4>
+
         <h5 id="text" class="card-title">Occupants: {{hood.occupants_count | upper}}</h5>
 
         <div class="row">
@@ -40,9 +42,9 @@
             </div>
             <div class="col-md-6">
 
-
+                <h2>Businesses in {{hood.name}} </h2>
+                <br>
                 <div class="card-columns">
-                    {% if businesses%}
                     {% for business in businesses%}
 
                     <div class="card-body">
@@ -50,8 +52,11 @@
                         <h5 id="text" class="card-title">{{business.description | safe}}</h5>
                         <h5 id="text" class="card-title">{{business.email }}</h5>
                     </div>
+                    {% empty %}
+                    <h4>No businesses yet! Create one <a style="color:blue;" href="{% url 'add_biz'  %}">here</a></h4>
+
                     {% endfor %}
-                    {% endif %}
+
 
                 </div>
             </div>
@@ -63,15 +68,18 @@
                 <br> <br>
 
 
-                {% if posts%}
                 {% for post in posts%}
                 <h3>{{post.name}}</h3>
                 <p id="text" style="margin-bottom:0;">By <a style="width:100%; padding-left:10px;" href="{% url 'user_profile' username=post.poster %}">
                         <label>{{post.poster}}</label></a></p>
 
+                {% empty %}
+                <h4>No posts :-(
+                    <br>
+                    <a style="color:blue;" href="{% url 'add_post'  %}">Create one!</a></h4>
+
                 {% endfor %}
 
-                {% endif %}
             </div>
         </div>
     </div>
