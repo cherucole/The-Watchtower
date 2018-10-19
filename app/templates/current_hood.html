@@ -1,2 +1,9 @@
 {{hood.name}}
 {{posts}}
+
+{% if businesses%}
+{% for business in businesses%}
+{{business.name}}
+{% endfor %}
+
+{% endif %}

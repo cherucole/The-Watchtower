@@ -111,6 +111,12 @@ class Business(models.Model):
         return businesses
 
 
+    @classmethod
+    def get_hood_biz(cls, id):
+        businesses = Business.objects.filter(biz_hood_pk=id)
+        return businesses
+
+
 class Join(models.Model):
 	'''
     Updating user location each time they join or leave a neghborhood	

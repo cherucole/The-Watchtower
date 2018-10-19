@@ -16,7 +16,7 @@ def homepage(request):
 		if Join.objects.filter(user_id = request.user).exists():
 			hood = Neighborhood.objects.get(pk = request.user.join.hood_id.id)
 			posts = 'Posts.objects.filter(hood = request.user.join.hood_id.id)'
-			businesses = "Business.objects.filter(hood = request.user.join.hood_id.id)"
+			businesses = Business.objects.filter(biz_hood = request.user.join.hood_id.id)
 			return render(request,'current_hood.html',{"hood":hood,"businesses":businesses,"posts":posts})
 		else:
 			hoods = Neighborhood.all_neighborhoods()
@@ -92,7 +92,7 @@ def join_hood(request,hood_id):
 		
 		Join(user_id=request.user,hood_id = neighborhood).save()
 
-	return redirect('add_profile')
+	return redirect('homepage')
 
 @login_required(login_url='/accounts/login/')
 def leave_hood(request,hood_id):
@@ -130,3 +130,9 @@ def add_post(request):
     else:
         form = AddPostForm()
     return render(request, 'add_post.html', {"form": form})
+
+def view_biz(request, id):
+    current_user = request.user
+    businesses= Business.get_neighborhood_businesses(id)
+
+    return redirect (request, 'businesses.html', {"business":businesses})
