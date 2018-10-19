@@ -23,3 +23,8 @@ class AddBizForm(forms.ModelForm):
         model = Business
         exclude = ['biz_owner', 'biz_hood']
 
+class AddPostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        exclude = ['poster', 'post_hood']
+

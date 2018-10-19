@@ -126,7 +126,8 @@ class Post(models.Model):
     name = models.CharField(max_length=30)
     image = models.ImageField(upload_to='images/', blank=True)
     description = HTMLField(blank=True)
-    hood_id=models.ForeignKey(Neighborhood, on_delete=models.CASCADE, null=True)
+    poster=models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    post_hood=models.ForeignKey(Neighborhood, on_delete=models.CASCADE, null=True)
     date = models.DateTimeField(auto_now_add=True)
 
     @classmethod

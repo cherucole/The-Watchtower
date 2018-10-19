@@ -115,3 +115,18 @@ def user_profile(request, username):
     # posts = Post.get_profile_image(profile.id)
     title = f'@{profile.username}'
     return render(request, 'profile.html', {'title':title, 'profile':profile, 'profile_info':profile_info})
+@login_required(login_url='/accounts/login/')
+def add_post(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = AddPostForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.poster = current_user
+            post.post_hood = request.user.join.hood_id
+            post.save()
+        return redirect('homepage')
+
+    else:
+        form = AddPostForm()
+    return render(request, 'add_post.html', {"form": form})
