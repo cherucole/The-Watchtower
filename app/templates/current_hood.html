@@ -27,47 +27,54 @@
 <body>
     <div class="container-fluid">
         <h1 id="mainheading" style="text-align:center;" class="display-4"> Watchtower</h1>
-        <a href="{% url 'add_biz'  %}" class="btn btn-sm btn-success">Add Business</a>
-
-            <a href="{% url 'add_post'  %}" class="btn btn-sm btn-success">Add Post</a>
-            <a href="{% url 'leave_hood' hood.id  %}" class="btn btn-sm btn-danger">Leave Hood</a>
-
+        {{hood.name}}
         <h5 id="text" class="card-title">Occupants: {{hood.occupants_count | upper}}</h5>
 
-        <div class="card-columns">
+        <div class="row">
+
+            <div class="col-md-3">
+                <a href="{% url 'add_biz'  %}" class="btn btn-sm btn-success">Add Business</a>
+
+                <a href="{% url 'add_post'  %}" class="btn btn-sm btn-success">Add Post</a>
+                <a href="{% url 'leave_hood' hood.id  %}" class="btn btn-sm btn-danger">Leave Hood</a>
+            </div>
+            <div class="col-md-6">
 
 
-            {{hood.name}}
+                <div class="card-columns">
+                    {% if businesses%}
+                    {% for business in businesses%}
 
-            {% if businesses%}
-            {% for business in businesses%}
+                    <div class="card-body">
+                        <h5 id="text" class="card-title">{{business.name | upper}}</h5>
+                        <h5 id="text" class="card-title">{{business.description | safe}}</h5>
+                        <h5 id="text" class="card-title">{{business.email }}</h5>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
 
-            <div class="card-body">
-                <h5 id="text" class="card-title">{{business.name | upper}}</h5>
-                <h5 id="text" class="card-title">{{business.description | safe}}</h5>
-
-
-
+                </div>
             </div>
 
-
-            {% endfor %}
-
-            {% endif %}
-            <a href="{% url 'add_biz'  %}" class="btn btn-sm btn-success">Add Business</a>
-
-            <a href="{% url 'add_post'  %}" class="btn btn-sm btn-success">Add Post</a>
-            <a href="{% url 'leave_hood' hood.id  %}" class="btn btn-sm btn-danger">Leave Hood</a>
+            <div class="col-md-3">
 
 
-            {% if posts%}
-            {% for post in posts%}
-            {{post.name}}
-            {{post.poster}}
-            {% endfor %}
+                <a href="" class="btn btn-sm btn-success">Hood Posts</a>
+                <br> <br>
 
-            {% endif %}
+
+                {% if posts%}
+                {% for post in posts%}
+                <h3>{{post.name}}</h3>
+                <p id="text" style="margin-bottom:0;">By <a style="width:100%; padding-left:10px;" href="{% url 'user_profile' username=post.poster %}">
+                        <label>{{post.poster}}</label></a></p>
+
+                {% endfor %}
+
+                {% endif %}
+            </div>
         </div>
+    </div>
 </body>
 
 </html>
