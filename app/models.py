@@ -130,6 +130,11 @@ class Post(models.Model):
     post_hood=models.ForeignKey(Neighborhood, on_delete=models.CASCADE, null=True)
     date = models.DateTimeField(auto_now_add=True)
 
+    '''
+    this is added to ensure the linter has no errors saying class has no objects member in VS Code IDE
+    '''
+    objects = models.Manager() 
+
     @classmethod
     def search_post(cls,search_term):
         posts = cls.objects.filter(name__icontains=search_term)
@@ -137,8 +142,8 @@ class Post(models.Model):
 
 
     @classmethod
-    def get_hood_posts(cls, hood_id):
-        posts=Post.objects.filter(hood_id=id)
+    def get_hood_posts(cls, post_hood):
+        posts=Post.objects.filter(post_hood=id)
         return posts
 
     # @classmethod
