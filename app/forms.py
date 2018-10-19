@@ -17,3 +17,9 @@ class AddHoodForm(forms.ModelForm):
         model = Neighborhood
         exclude = ['user_profile', 'profile']
 
+
+class AddBizForm(forms.ModelForm):
+    class Meta:
+        model = Business
+        exclude = ['biz_owner', 'biz_hood']
+

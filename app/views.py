@@ -53,9 +53,9 @@ def add_hood(request):
     if request.method == 'POST':
         form = AddHoodForm(request.POST, request.FILES)
         if form.is_valid():
-            post = form.save(commit=False)
-            post.user_profile = current_user
-            post.save()
+            hood = form.save(commit=False)
+            hood.user_profile = current_user
+            hood.save()
         return redirect('homepage')
 
     else:
@@ -64,19 +64,20 @@ def add_hood(request):
 
 
 @login_required(login_url='/accounts/login/')
-def add_hood(request):
+def add_biz(request):
     current_user = request.user
     if request.method == 'POST':
-        form = AddHoodForm(request.POST, request.FILES)
+        form = AddBizForm(request.POST, request.FILES)
         if form.is_valid():
-            post = form.save(commit=False)
-            post.user_profile = current_user
-            post.save()
+            biz = form.save(commit=False)
+            biz.biz_owner = current_user
+            biz.biz_hood = request.user.join.hood_id
+            biz.save()
         return redirect('homepage')
 
     else:
-        form = AddHoodForm()
-    return render(request, 'add_hood.html', {"form": form})
+        form = AddBizForm()
+    return render(request, 'add_biz.html', {"form": form})
 
 @login_required(login_url='/accounts/login/')
 def join_hood(request,hood_id):

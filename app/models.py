@@ -48,7 +48,7 @@ class Neighborhood(models.Model):
     name = models.CharField(max_length=30)
     occupants_count=models.IntegerField(default=0, blank=True)
     # profile=models.ForeignKey(Profile, on_delete=models.CASCADE, null=True)
-    user_profile = models.ForeignKey(User,on_delete=models.CASCADE, related_name='posts',blank=True)
+    user_profile = models.ForeignKey(User,on_delete=models.CASCADE, related_name='hoods',blank=True)
     date = models.DateTimeField(auto_now_add=True)
     '''
     this is added to ensure the linter has no errors saying class has no objects member in VS Code IDE
@@ -96,8 +96,8 @@ class Business(models.Model):
     name = models.CharField(max_length=30)
     description = HTMLField(blank=True)
     email = models.EmailField(max_length=70,blank=True)
-    biz_owner=models.ForeignKey(Profile, on_delete=models.CASCADE, null=True)
-    biz_hood=models.ForeignKey(Neighborhood, on_delete=models.CASCADE, null=True)
+    biz_owner=models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    biz_hood=models.ForeignKey(Neighborhood, on_delete=models.CASCADE, related_name='biz',null=True)
 
     '''
     this is added to ensure the linter has no errors saying class has no objects member in VS Code IDE

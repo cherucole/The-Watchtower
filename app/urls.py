@@ -10,6 +10,7 @@ urlpatterns=[
     url(r'^add/hood$', views.add_hood, name='add_hood'),
     url(r'^join_hood/(\d+)',views.join_hood,name = 'join_hood'),
     url(r'^leave_hood/(\d+)',views.leave_hood,name = 'leave_hood'),
+    url(r'^add/biz$', views.add_biz, name='add_biz'),
 
 
 
