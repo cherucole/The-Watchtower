@@ -1,31 +1,75 @@
 {%extends 'base.html'%}
+{% load bootstrap4 %}
 {% block content %}
 {{ block.super}}
-{% load bootstrap4 %}
-{% load staticfiles%}
+{% load staticfiles %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="https://fonts.googleapis.com/css?family=K2D" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+        crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Grand+Hotel" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <h1 id="mainheading" style="text-align:center;" class="display-4"> Watchtower</h1>
+        <a href="{% url 'add_biz'  %}" class="btn btn-sm btn-success">Add Business</a>
+
+            <a href="{% url 'add_post'  %}" class="btn btn-sm btn-success">Add Post</a>
+            <a href="{% url 'leave_hood' hood.id  %}" class="btn btn-sm btn-danger">Leave Hood</a>
+
+        <h5 id="text" class="card-title">Occupants: {{hood.occupants_count | upper}}</h5>
+
+        <div class="card-columns">
+
+
+            {{hood.name}}
+
+            {% if businesses%}
+            {% for business in businesses%}
+
+            <div class="card-body">
+                <h5 id="text" class="card-title">{{business.name | upper}}</h5>
+                <h5 id="text" class="card-title">{{business.description | safe}}</h5>
 
 
 
-
-{{hood.name}}
-
-{% if businesses%}
-{% for business in businesses%}
-{{business.name}}
-{% endfor %}
-
-{% endif %}
-<a href="{% url 'add_biz'  %}" class="btn btn-sm btn-success">Add Business</a>
-
-<a href="{% url 'add_post'  %}" class="btn btn-sm btn-success">Add Post</a>
-<a href="{% url 'leave_hood' hood.id  %}" class="btn btn-sm btn-danger">Leave Hood</a>
+            </div>
 
 
-{% if posts%}
-{% for post in posts%}
-{{post.name}}
-{{post.poster}}
-{% endfor %}
+            {% endfor %}
 
-{% endif %}
+            {% endif %}
+            <a href="{% url 'add_biz'  %}" class="btn btn-sm btn-success">Add Business</a>
+
+            <a href="{% url 'add_post'  %}" class="btn btn-sm btn-success">Add Post</a>
+            <a href="{% url 'leave_hood' hood.id  %}" class="btn btn-sm btn-danger">Leave Hood</a>
+
+
+            {% if posts%}
+            {% for post in posts%}
+            {{post.name}}
+            {{post.poster}}
+            {% endfor %}
+
+            {% endif %}
+        </div>
+</body>
+
+</html>
+
 {% endblock %}
