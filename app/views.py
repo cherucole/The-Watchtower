@@ -137,3 +137,6 @@ def add_post(request):
 #     businesses= Business.get_neighborhood_businesses(biz_hood = hood.id)
 
 #     return redirect (request, 'businesses.html', {"business":businesses})
+def search_results(request):
+    results="this are results"
+    return render (request, 'search.html',{'results':results})
