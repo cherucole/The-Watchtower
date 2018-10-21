@@ -27,7 +27,7 @@
         {% for business in businesses %}
         <div class="card" style="width:100%;">
 
-            <div class="card-body">
+            <div class="card-body" style="background-color:#eceff1;">
                 <h5>{{business.name | upper}}</h5>
                 <h5>{{business.description | safe}}</h5>
                 <p>{{business.email }}</p>

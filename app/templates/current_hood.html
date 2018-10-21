@@ -49,7 +49,7 @@
                     <div class="card" style="width:100%;">
 
 
-                        <div class="card-body">
+                        <div class="card-body" style="background-color:#eceff1;">
                             <h5>{{business.name | upper}}</h5>
                             <h5>{{business.description | safe}}</h5>
                             <p>{{business.email }}</p>
@@ -57,7 +57,7 @@
                     </div>
 
                     {% empty %}
-                    <h4>No businesses yet! Create one <a style="color:blue;" href="{% url 'add_biz'  %}">here</a></h4>
+                    <h4>No businesses yet! Create one <a style="color:#4fc3f7;" href="{% url 'add_biz'  %}">here</a></h4>
 
                     {% endfor %}
 
@@ -80,7 +80,7 @@
                 {% empty %}
                 <h4>No posts :-(
                     <br>
-                    <a style="color:blue;" href="{% url 'add_post'  %}">Create one!</a></h4>
+                    <a style="color:#4fc3f7;" href="{% url 'add_post'  %}">Create one!</a></h4>
 
                 {% endfor %}
 
