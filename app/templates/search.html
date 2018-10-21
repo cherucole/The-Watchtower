@@ -32,7 +32,9 @@
                 <h5>{{business.description | safe}}</h5>
                 <p>{{business.email }}</p>
                 <p>Location: {{business.biz_hood.name}}</p>
-                <p>Owner: {{business.biz_owner.username}}</p>
+                <p>Owner:<a style="width:100%; padding-left:10px;" href="{% url 'user_profile' username=business.biz_owner.username %}">
+
+                        <label>{{business.biz_owner.username}}</label></a> </p>
             </div>
         </div>
 
