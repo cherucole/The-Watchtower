@@ -38,7 +38,7 @@
     <div class="navbar navbar-dark bg-dark fixed-top">
         <a href="{% url 'homepage' %}"> Home</a>
         <form class="form-inline my-2 my-lg-0" role="search" action="{% url 'search_results' %}">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="post">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="business">
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
         <a  href="{% url 'user_profile' username=user %}">My Profile</a>

@@ -104,6 +104,10 @@ class Business(models.Model):
     '''
     objects = models.Manager() 
 
+    @classmethod
+    def search_by_name(cls,search_term):
+        businesses = cls.objects.filter(name__icontains=search_term)
+        return businesses
 
     @classmethod
     def get_neighborhood_businesses(cls, neighborhood_id):
