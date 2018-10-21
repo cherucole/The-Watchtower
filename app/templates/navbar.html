@@ -1,8 +1,9 @@
-    <!DOCTYPE html>
-    <html>
-    <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
     body {margin:0;}
     .navbar {
       overflow: hidden;
@@ -30,52 +31,55 @@
       height: 1500px; /* Used in this example to enable scrolling */
     }
     </style>
-    </head>
-    <body>
-    
-    
-    
-    <div class="navbar navbar-dark bg-dark fixed-top">
-        <a href="{% url 'homepage' %}"> Home</a>
-        <form class="form-inline my-2 my-lg-0" role="search" action="{% url 'search_results' %}">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="business">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-        <a  href="{% url 'user_profile' username=user %}">My Profile</a>
-    
-      <div class="row" >
+</head>
+
+<body>
+
+
+
+  <div class="navbar navbar-dark bg-dark fixed-top">
+    <a href="{% url 'homepage' %}"> Home</a>
+    <form class="form-inline my-2 my-lg-0" role="search" action="{% url 'search_results' %}">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search businesses . . ." aria-label="Search" name="business">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    <a href="{% url 'user_profile' username=user %}">My Profile</a>
+
+    <div class="row">
       <div style="width:100%;">
-    <!-- Sidebar -->
-    <div class="w3-sidebar w3-bar-block w3-animate-left" style="display:none;z-index:5" id="mySidebar">
-      <button class="w3-bar-item w3-button w3-large" onclick="w3_close()">Close &times;</button>
-      <!--<a href="#" class="w3-bar-item w3-button w3-border-bottom" >Home</a>-->
-      <a href="{% url 'add_profile' %}" class="w3-bar-item w3-button w3-border-bottom">Add Profile</a>
-      <a href="/logout" class="w3-bar-item w3-button w3-border-bottom">Log Out</a>
-    </div>
-    
-    <!-- Page Content -->
-    <div class="w3-overlay w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" id="myOverlay"></div>
-    
-    <div>
-      <button class="w3-button w3-white w3-xxlarge" onclick="w3_open()">&#9776;</button>
+        <!-- Sidebar -->
+        <div class="w3-sidebar w3-bar-block w3-animate-left" style="display:none;z-index:5" id="mySidebar">
+          <button class="w3-bar-item w3-button w3-large" onclick="w3_close()">Close &times;</button>
+          <!--<a href="#" class="w3-bar-item w3-button w3-border-bottom" >Home</a>-->
+          <a href="{% url 'add_profile' %}" class="w3-bar-item w3-button w3-border-bottom">Add Profile</a>
+          <a href="/logout" class="w3-bar-item w3-button w3-border-bottom">Log Out</a>
+        </div>
+
+        <!-- Page Content -->
+        <div class="w3-overlay w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" id="myOverlay"></div>
+
+        <div>
+          <button class="w3-button w3-white w3-xxlarge" onclick="w3_open()">&#9776;</button>
+        </div>
+
+        <script>
+          function w3_open() {
+            document.getElementById("mySidebar").style.display = "block";
+            document.getElementById("myOverlay").style.display = "block";
+          }
+
+          function w3_close() {
+            document.getElementById("mySidebar").style.display = "none";
+            document.getElementById("myOverlay").style.display = "none";
+          }
+        </script>
       </div>
-    
-    <script>
-    function w3_open() {
-        document.getElementById("mySidebar").style.display = "block";
-        document.getElementById("myOverlay").style.display = "block";
-    }
-    function w3_close() {
-        document.getElementById("mySidebar").style.display = "none";
-        document.getElementById("myOverlay").style.display = "none";
-    }
-    </script>
+
+
     </div>
-    
-    
-    </div>
-    </div>
-    
-    
-    </body>
-    </html>
+  </div>
+
+
+</body>
+
+</html>
