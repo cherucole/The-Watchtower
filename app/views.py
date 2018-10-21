@@ -112,9 +112,9 @@ def user_profile(request, username):
         profile_info = Profile.get_profile(profile.id)
     except:
         profile_info = Profile.filter_by_id(profile.id)
-    # posts = Post.get_profile_image(profile.id)
+    businesses = Business.get_profile_businesses(profile.id)
     title = f'@{profile.username}'
-    return render(request, 'profile.html', {'title':title, 'profile':profile, 'profile_info':profile_info})
+    return render(request, 'profile.html', {'title':title, 'profile':profile, 'profile_info':profile_info, 'businesses':businesses})
 @login_required(login_url='/accounts/login/')
 def add_post(request):
     current_user = request.user
