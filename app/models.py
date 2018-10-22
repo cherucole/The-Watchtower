@@ -163,12 +163,12 @@ class Post(models.Model):
         posts = Post.objects.filter(post_hood=id)
         return posts
 
-    # @classmethod
-    # def get_profile_image(cls, profile):
-    #     posts = Post.objects.filter(user_profile__pk=profile)
-    #     return posts
+    @classmethod
+    def search_by_name(cls, search_term):
+        posts = cls.objects.filter(name__icontains=search_term)
+        return posts
 
-    # @classmethod
-    # def get_post_by_id(cls,id):
-    #     post = Post.objects.filter(id = Post.id)
-    #     return post
+    @classmethod
+    def all_posts(cls,id):
+        posts = Post.objects.all()
+        return posts

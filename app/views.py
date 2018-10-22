@@ -12,25 +12,20 @@ from .email import *
 
 
 def homepage(request):
-	if request.user.is_authenticated:
-		if Join.objects.filter(user_id = request.user).exists():
-			hood = Neighborhood.objects.get(pk = request.user.join.hood_id.id)
-			posts = Post.objects.filter(post_hood = request.user.join.hood_id.id)
-			businesses = Business.objects.filter(biz_hood = request.user.join.hood_id.id)
-			return render(request,'current_hood.html',{"hood":hood,"businesses":businesses,"posts":posts})
-		else:
-			hoods = Neighborhood.all_neighborhoods()
-			return render(request,'index.html',{"hoods":hoods})
-	else:
-		hoods = Neighborhood.all_neighborhoods()
-		return render(request,'index.html',{"hoods":hoods})
+    if request.user.is_authenticated:
+        if Join.objects.filter(user_id=request.user).exists():
+            hood = Neighborhood.objects.get(pk=request.user.join.hood_id.id)
+            posts = Post.objects.filter(post_hood=request.user.join.hood_id.id)
+            businesses = Business.objects.filter(
+                biz_hood=request.user.join.hood_id.id)
+            return render(request, 'current_hood.html', {"hood": hood, "businesses": businesses, "posts": posts})
+        else:
+            hoods = Neighborhood.all_neighborhoods()
+            return render(request, 'index.html', {"hoods": hoods})
+    else:
+        hoods = Neighborhood.all_neighborhoods()
+        return render(request, 'index.html', {"hoods": hoods})
 
-
-
-# def homepage(request):
-#     hoods = Neighborhood.all_neighborhoods()
-
-#     return render(request, 'index.html', {"hoods":hoods})
 
 @login_required(login_url='/accounts/login/')
 def add_profile(request):
@@ -46,6 +41,7 @@ def add_profile(request):
     else:
         form = NewProfileForm()
     return render(request, 'new_profile.html', {"form": form})
+
 
 @login_required(login_url='/accounts/login/')
 def add_hood(request):
@@ -79,30 +75,32 @@ def add_biz(request):
         form = AddBizForm()
     return render(request, 'add_biz.html', {"form": form})
 
-@login_required(login_url='/accounts/login/')
-def join_hood(request,hood_id):
-	'''
-	This view function will implement adding 
-	'''
-	neighborhood = Neighborhood.objects.get(pk = hood_id)
-	if Join.objects.filter(user_id = request.user).exists():
-		
-		Join.objects.filter(user_id = request.user).update(hood_id = neighborhood)
-	else:
-		
-		Join(user_id=request.user,hood_id = neighborhood).save()
-
-	return redirect('homepage')
 
 @login_required(login_url='/accounts/login/')
-def leave_hood(request,hood_id):
-	'''
-	This function will delete a neighbourhood instance in the join table
-	'''
-	if Join.objects.filter(user_id = request.user).exists():
-		Join.objects.get(user_id = request.user).delete()
-		# messages.error(request, 'You have left this awesome neighborhood ;-(')
-		return redirect('homepage')
+def join_hood(request, hood_id):
+    '''
+    This view function will implement adding 
+    '''
+    neighborhood = Neighborhood.objects.get(pk=hood_id)
+    if Join.objects.filter(user_id=request.user).exists():
+
+        Join.objects.filter(user_id=request.user).update(hood_id=neighborhood)
+    else:
+
+        Join(user_id=request.user, hood_id=neighborhood).save()
+
+    return redirect('homepage')
+
+
+@login_required(login_url='/accounts/login/')
+def leave_hood(request, hood_id):
+    '''
+    This function will delete a neighbourhood instance in the join table
+    '''
+    if Join.objects.filter(user_id=request.user).exists():
+        Join.objects.get(user_id=request.user).delete()
+        # messages.error(request, 'You have left this awesome neighborhood ;-(')
+        return redirect('homepage')
 
 
 @login_required(login_url='/accounts/login/')
@@ -114,7 +112,9 @@ def user_profile(request, username):
         profile_info = Profile.filter_by_id(profile.id)
     businesses = Business.get_profile_businesses(profile.id)
     title = f'@{profile.username}'
-    return render(request, 'profile.html', {'title':title, 'profile':profile, 'profile_info':profile_info, 'businesses':businesses})
+    return render(request, 'profile.html', {'title': title, 'profile': profile, 'profile_info': profile_info, 'businesses': businesses})
+
+
 @login_required(login_url='/accounts/login/')
 def add_post(request):
     current_user = request.user
@@ -146,8 +146,8 @@ def search_results(request):
         business_results = Business.search_by_name(search_term)
         message = f"{search_term}"
 
-        return render(request, 'search.html',{"message":message,"businesses": business_results})
+        return render(request, 'search.html', {"message": message, "businesses": business_results})
 
     else:
         message = "Please enter a search term"
-        return render(request, 'search.html',{"message":message})
+        return render(request, 'search.html', {"message": message})
