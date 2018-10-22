@@ -51,7 +51,6 @@ class BusinessTest(TestCase):
         self.profile = Profile.objects.create(
             user=self.user, email='sample@noreply.com', contact='mycontact')
 
-
         self.biz = Business.objects.create(name='mpesa',
                                            description='available and reliable', email='sample@noreply.com')
 
